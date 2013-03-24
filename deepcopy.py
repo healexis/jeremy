@@ -10,7 +10,7 @@ def deepcopy( arr ):
    # history[ id ] = newArr
    history = {}
 
-   def _deepcopy( arr, ):
+   def _deepcopy( arr ):
       if type( arr ) is not list:
          return arr
 
