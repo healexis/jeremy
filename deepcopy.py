@@ -7,36 +7,22 @@ def deepcopy( arr ):
 
    # Keep a history of all the elements we've seen so far, so we can
    # compare them with the current element to check for loops.
-   # *History[ index ] = arr
+   # history[ id ] = newArr
    history = {}
-   newHistory = {}
 
-   def _deepcopy( arr, index="-1," ):
+   def _deepcopy( arr, ):
       if type( arr ) is not list:
          return arr
 
-      for ( oldIndex, oldArr ) in history.items():
-          # Check for array identity, not equality.
-         if arr is oldArr:
-            # We have a loop!
-            return newHistory[ oldIndex ]
+      if id( arr ) in history:
+         return history[ id( arr ) ]
 
-      # Save the current array in the history.
-      currIndex = -1
-      currIndexStr = index + str( currIndex ) + ","
       newArr = []
-      history[ currIndexStr ] = arr
-      newHistory[ currIndexStr ] = newArr
-      currIndex += 1
-
-      # Save each element within the array in the history.
+      history[ id( arr ) ] = newArr
       for element in arr:
-         currIndexStr = index + str( currIndex ) + ","
-         newElement = _deepcopy( element, index=currIndexStr )
-         history[ currIndexStr ] = element
-         newHistory[ currIndexStr ] = newElement
+         newElement = _deepcopy( element )
+         history[ id( element ) ] = newElement
          newArr.append( newElement )
-         currIndex += 1
 
       return newArr
 
