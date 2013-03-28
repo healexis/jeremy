@@ -21,7 +21,6 @@ def deepcopy( arr ):
       history[ id( arr ) ] = newArr
       for element in arr:
          newElement = _deepcopy( element )
-         history[ id( element ) ] = newElement
          newArr.append( newElement )
 
       return newArr
